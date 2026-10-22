@@ -16,3 +16,7 @@ The dashboard runs with demo data outside an extension context. When loaded with
 ## Architecture direction
 
 `src/domain.ts` contains browser-independent domain helpers and bookmark types. `src/browser.ts` isolates WebExtensions access so the future WXT entrypoints can wire import/reconciliation, events, and IndexedDB/Dexie persistence without coupling the UI to browser APIs. Topic suggestions in this MVP are represented locally; the provider boundary for opt-in AI processing should sit beside that domain module before any external requests are added.
+
+## Try real browser bookmarks
+
+Run `pnpm build`, then open `chrome://extensions` (or `edge://extensions`), enable Developer mode, choose **Load unpacked**, and select the generated `dist` folder. Open the Topicraft extension popup and press **Sync bookmarks**. The extension reads browser bookmarks and stores Topicraft metadata locally; it does not modify or upload your bookmarks.

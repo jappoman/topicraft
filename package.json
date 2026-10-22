@@ -22,7 +22,9 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
+    "geckodriver": "^8.0.0",
     "prettier": "latest",
+    "selenium-webdriver": "^4.51.0",
     "typescript": "latest",
     "vitest": "latest"
   }

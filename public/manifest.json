@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Topicraft",
+  "version": "0.1.0",
+  "description": "A local-first browser bookmark organizer.",
+  "permissions": ["bookmarks", "storage"],
+  "action": {
+    "default_title": "Open Topicraft",
+    "default_popup": "index.html"
+  }
+}

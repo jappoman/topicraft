@@ -24,6 +24,13 @@ export const seedBookmarks: Bookmark[] = [
   { id: '6', title: 'Making sense of the new Firefox extension APIs', url: 'developer.mozilla.org/extensions', domain: 'developer.mozilla.org', description: 'Reference documentation for WebExtensions, permissions, storage, and cross-browser APIs.', folder: 'Development', topics: ['Programming', 'Guides'], status: 'analyzed', addedAt: '2024-06-10', color: '#fee2e2', initials: 'M', relatedCount: 2 },
 ]
 
+export const bookmarkFromBrowserNode = (node: { id: string; title: string; url: string; dateAdded?: number; folder?: string }, previous?: Bookmark): Bookmark => {
+  let domain = 'Unknown site'
+  try { domain = new URL(node.url).hostname.replace(/^www\./, '') } catch { domain = node.url.split('/')[0] || 'Unknown site' }
+  const title = node.title.trim() || node.url
+  return { id: node.id, title, url: node.url, domain, description: previous?.description ?? 'Bookmark imported from your browser.', folder: node.folder || 'Bookmarks', topics: previous?.topics ?? [], status: previous?.status ?? 'pending', addedAt: new Date(node.dateAdded ?? Date.now()).toISOString().slice(0, 10), color: previous?.color ?? '#dbeafe', initials: title.charAt(0).toUpperCase(), relatedCount: previous?.relatedCount ?? 0 }
+}
+
 export const topicCounts = (items: Bookmark[]) => Object.entries(items.flatMap((item) => item.topics).reduce<Record<string, number>>((acc, topic) => ({ ...acc, [topic]: (acc[topic] ?? 0) + 1 }), {})).sort((a, b) => b[1] - a[1])
 
 export const normalizeUrl = (raw: string) => {
